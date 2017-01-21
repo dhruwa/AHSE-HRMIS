@@ -187,7 +187,7 @@
 								foreach ($users as $user)
 								{ 
 									?>
-										<option value="{{ $user->emp_id}}">{{ $user->emp_id }}</option>
+										<option value="{{ Crypt::encrypt($user->emp_id) }}">{{ $user->emp_id }}</option>
 									<?php
 								}														
 							?>												

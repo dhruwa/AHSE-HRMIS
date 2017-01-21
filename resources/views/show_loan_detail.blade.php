@@ -103,9 +103,9 @@
 							value="{{ $row->remarks}}" readonly />
 					</div>
 					<?php if($row->status == 2){ ?>						
-						<a href="../approved_loan/{{ $row->loan_transection_id }}" class="btn btn-primary btn-block btn-flat" >Approve</a>
-						<a href="../rejected_loan/{{ $row->loan_transection_id }}" class="btn btn-primary btn-block btn-flat" >Reject</a>
-						<a href="../back_to_branch_loan/{{ $row->loan_transection_id }}" class="btn btn-primary btn-block btn-flat" >Resend</a>
+						<a href="../approved_loan/{{ Crypt::encrypt($row->loan_transection_id) }}" class="btn btn-primary btn-block btn-flat" >Approve</a>
+						<a href="../rejected_loan/{{ Crypt::encrypt($row->loan_transection_id) }}" class="btn btn-primary btn-block btn-flat" >Reject</a>
+						<a href="../back_to_branch_loan/{{ Crypt::encrypt($row->loan_transection_id) }}" class="btn btn-primary btn-block btn-flat" >Resend</a>
 						
 					<?php } 
 					elseif($row->status == 3){

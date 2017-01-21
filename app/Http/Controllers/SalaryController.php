@@ -5,7 +5,7 @@ use Request;
 use App\salary_claims;
 use App\employee;
 use App\salary_deduction;
-use DB;
+use DB, Crypt;
 use Input;
 use Excel;
 class SalaryController extends Controller

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Request;
 use Illuminate\Support\Facades\Auth;
-use DB;
+use DB, Crypt;
 use App\loanmaster;
 use App\loantransaction;
 use App\logbook;
@@ -86,6 +86,7 @@ class LoanController extends Controller
 	}
 	
 	public function approved_loan($loan_transection_id){		
+		$loan_transection_id = Crypt::decrypt($loan_transection_id);
 		$i = DB::table('loan_trasection')->where('loan_transection_id', $loan_transection_id)->update(['status' => 3]);
 		$j = DB::table('employee_loan')->where('emp_loan_id', $loan_transection_id)->update(['status' => 3]);
 		$id = Auth::user()->id;
@@ -100,7 +101,8 @@ class LoanController extends Controller
 		return redirect('/loanapplication');
 	}
 	
-	public function rejected_loan($loan_transection_id){		
+	public function rejected_loan($loan_transection_id){	
+		$loan_transection_id = Crypt::decrypt($loan_transection_id);	
 		$i = DB::table('loan_trasection')->where('loan_transection_id', $loan_transection_id)->update(['status' => 4]);
 		$j = DB::table('employee_loan')->where('emp_loan_id', $loan_transection_id)->update(['status' => 4]);
 		$id = Auth::user()->id;
@@ -115,7 +117,8 @@ class LoanController extends Controller
 		return redirect('/loanapplication');
 	}
 	
-	public function back_to_branch_loan($loan_transection_id){		
+	public function back_to_branch_loan($loan_transection_id){	
+		$loan_transection_id = Crypt::decrypt($loan_transection_id);		
 		$i = DB::table('loan_trasection')->where('loan_transection_id', $loan_transection_id)->update(['status' => 1]);
 		$j = DB::table('employee_loan')->where('emp_loan_id', $loan_transection_id)->update(['status' => 1]);
 		$id = Auth::user()->id;
